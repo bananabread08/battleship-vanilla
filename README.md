@@ -1,0 +1,3 @@
+# Project: Battleship
+
+## Vanilla JavaScript
