@@ -1,0 +1,54 @@
+.mainboard {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.row {
+  display: flex;
+  height: 40px;
+}
+.column {
+  width: 40px;
+  margin: 0.5px;
+  border: 2px solid black;
+  background: rgb(255, 255, 255);
+  background: linear-gradient(
+    27deg,
+    rgba(255, 255, 255, 1) 0%,
+    rgba(156, 161, 229, 1) 21%,
+    rgba(2, 13, 189, 1) 100%
+  );
+}
+.column:hover {
+  background: green;
+  cursor: pointer;
+}
+.carrier {
+  background: #b7410e;
+}
+.battleship {
+  background: #e1ad01;
+}
+.frigate {
+  background: gray;
+}
+.submarine {
+  background: magenta;
+}
+.destroyer {
+  background: #40e0d0;
+}
+.tanker {
+  background: #addfad;
+}
+.hit {
+  background: red;
+}
+.miss {
+  background: white;
+}
+
+.enemyboard {
+  margin-left: 10px;
+}
