@@ -1,30 +1,20 @@
 import playerFactory from './factories/playerFactory';
 import gameboardFactory from './factories/gameboardFactory';
+import render from './render';
+import getAndSetShips from './getAndSetShips';
 import './styles/style.css';
 
-const playerBoardEl = document.querySelector('.playerboard');
-const enemyBoardEl = document.querySelector('.enemyboard');
 const player = playerFactory('you', gameboardFactory()).startGameboard();
 const enemy = playerFactory('enemy', gameboardFactory()).startGameboard();
 
-player.getBoard().forEach((row) => {
-  const rowBlock = document.createElement('div');
-  rowBlock.classList.add('row');
-  row.forEach((column) => {
-    const columnBlock = document.createElement('div');
-    columnBlock.classList.add('column');
-    rowBlock.appendChild(columnBlock);
-  });
-  playerBoardEl.appendChild(rowBlock);
-});
+getAndSetShips(player);
+getAndSetShips(enemy);
+render(player, enemy);
 
-enemy.getBoard().forEach((row) => {
-  const rowBlock = document.createElement('div');
-  rowBlock.classList.add('row');
-  row.forEach((column) => {
-    const columnBlock = document.createElement('div');
-    columnBlock.classList.add('column');
-    rowBlock.appendChild(columnBlock);
-  });
-  enemyBoardEl.appendChild(rowBlock);
+let count = 0;
+const message = document.querySelector('.messagelog');
+document.querySelector('.button').addEventListener('click', (e) => {
+  e.preventDefault();
+  message.value = `${count}`;
+  count++;
 });
