@@ -78,14 +78,17 @@ const gameboardFactory = () => {
     }
   };
   const fireMissile = (x, y) => {
-    if (board[x][y] === 'hit') return;
-    if (board[x][y] === 0) board[x][y] = 'miss';
+    if (board[x][y] === 'hit' || board[x][y] === 'miss') return 'invalid';
+    if (board[x][y] === 0) {
+      board[x][y] = 'miss';
+      return 'miss';
+    }
     if (shipNames.includes(board[x][y])) {
       const mark = shipNames.find((name) => name === board[x][y]);
       getTargetShip(x, y, mark);
       board[x][y] = 'hit';
+      return 'hit';
     }
-    return board;
   };
 
   return { getBoard, placeShip, fireMissile, shipArray };

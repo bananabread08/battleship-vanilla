@@ -110,20 +110,15 @@ describe('Placing Ships / Set-Up Phase', () => {
 
 describe('Firing Missiles / Attack Phase', () => {
   test('missile missed', () => {
-    const expected = resetBoard();
-    expected[1][2] = 'miss';
     const gameboard = gameboardFactory();
-    expect(gameboard.fireMissile(1, 2)).toEqual(expected);
+    expect(gameboard.fireMissile(1, 2)).toEqual('miss');
   });
 
   test('missile hit a ship', () => {
-    const expected = resetBoard();
-    expected[1][0] = 'submarine';
-    expected[1][1] = 'submarine';
-    expected[1][2] = 'hit';
     const gameboard = gameboardFactory();
-    gameboard.placeShip(shipFactory(shipTypes.submarine), 1, 0);
-    expect(gameboard.fireMissile(1, 2)).toEqual(expected);
+    const submarine = shipFactory(shipTypes.submarine);
+    gameboard.placeShip(submarine, 1, 2);
+    expect(gameboard.fireMissile(1, 2)).toEqual('hit');
   });
 
   test('missile sunk a ship', () => {
