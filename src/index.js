@@ -23,29 +23,41 @@ const enemyTurn = () => {
     enemyTurn();
   }
   player.fireMissile(x, y);
-  // console.log(player.shipArray);
+  console.log(player.shipArray);
+};
+
+const playerTurn = (e) => {
+  if (
+    enemy.getBoard()[Number(e.target.parentNode.classList[2])][
+      Number(e.target.classList[2])
+    ] === 'miss' ||
+    enemy.getBoard()[Number(e.target.parentNode.classList[2])][
+      Number(e.target.classList[2])
+    ] === 'hit'
+  )
+    return 'invalid';
+
+  return enemy.fireMissile(
+    Number(e.target.parentNode.classList[2]),
+    Number(e.target.classList[2])
+  );
 };
 
 // play 1 round. fire missile to enemy, enemy fires to player
 const playRound = (e) => {
-  if (
-    enemy.fireMissile(
-      Number(e.target.parentNode.classList[2]),
-      Number(e.target.classList[2])
-    ) === 'invalid'
-  )
-    return;
-  enemy.fireMissile(
-    Number(e.target.parentNode.classList[2]),
-    Number(e.target.classList[2])
-  );
-  // console.log(enemy.shipArray);
-  enemyTurn();
-  render(player, enemy);
-
-  document.querySelectorAll('.enemy.column').forEach((col) => {
-    col.addEventListener('click', playRound);
-  });
+  if (playerTurn(e) === 'invalid') {
+    document.querySelectorAll('.enemy.column').forEach((col) => {
+      col.removeEventListener('click', playRound);
+      col.addEventListener('click', playRound);
+    });
+  } else {
+    enemyTurn();
+    render(player, enemy);
+    document.querySelectorAll('.enemy.column').forEach((col) => {
+      col.removeEventListener('click', playRound);
+      col.addEventListener('click', playRound);
+    });
+  }
 };
 
 // event starter
