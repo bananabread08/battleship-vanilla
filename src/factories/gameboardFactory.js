@@ -6,6 +6,7 @@ const gameboardFactory = () => {
     'frigate',
     'submarine',
     'destroyer',
+    'tanker',
   ];
   const shipArray = [];
 
