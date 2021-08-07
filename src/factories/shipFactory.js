@@ -35,11 +35,11 @@ const shipFactory = (length) => {
     return axis;
   }; // change rotation
 
-  const hit = (position) => {
-    shipHP.splice(position, 1, 'hit');
+  const hit = () => {
+    shipHP.pop();
   };
 
-  const isSunk = () => shipHP.every((hp) => hp === 'hit');
+  const isSunk = () => shipHP.length === 0;
 
   return { length, isRotated, hit, isSunk, shipHP, axis, name };
 };

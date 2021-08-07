@@ -56,13 +56,13 @@ const gameboardFactory = () => {
     if (mark === 'tanker') return 1;
   };
 
-  const checkWinner = (damagedShip) => {
-    if (damagedShip.isSunk()) {
-      const index = shipArray.findIndex((ship) => ship === damagedShip);
-      shipArray.splice(index, 1);
-    }
-    return shipArray.length === 0;
-  };
+  // const checkWinner = (damagedShip) => {
+  //   if (damagedShip.isSunk()) {
+  //     const index = shipArray.findIndex((ship) => ship === damagedShip);
+  //     shipArray.splice(index, 1);
+  //   }
+  //   return shipArray.length === 0;
+  // };
 
   const getTargetShip = (x, y, mark) => {
     // const mark = shipNames.find((name) => name === target);
@@ -70,13 +70,7 @@ const gameboardFactory = () => {
     const damagedShip = shipArray.find(
       (ship) => ship.length === getLengthFromArray(mark)
     );
-    if (damagedShip.axis === false) {
-      damagedShip.hit(y);
-      if (checkWinner(damagedShip)) return true;
-    } else {
-      damagedShip.hit(x);
-      if (checkWinner(damagedShip)) return true;
-    }
+    damagedShip.hit();
   };
   const fireMissile = (x, y) => {
     if (board[x][y] === 'hit' || board[x][y] === 'miss') return 'invalid';

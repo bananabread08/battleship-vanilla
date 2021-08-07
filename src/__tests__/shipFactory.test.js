@@ -23,8 +23,8 @@ test('hit with no position', () => {
 
 test('successful Ship hit', () => {
   const ship = shipFactory(5);
-  ship.hit(2);
-  expect(ship.shipHP).toEqual(['o', 'o', 'hit', 'o', 'o']);
+  ship.hit();
+  expect(ship.shipHP).toEqual(['o', 'o', 'o', 'o']);
 });
 test('rotate Ship', () => {
   const ship = shipFactory(3);
@@ -38,10 +38,10 @@ test('check if Ship is not sunk', () => {
 
 test('succesfull sunk Ship', () => {
   const ship = shipFactory(5);
-  ship.hit(1);
-  ship.hit(2);
-  ship.hit(0);
-  ship.hit(3);
-  ship.hit(4);
+  ship.hit();
+  ship.hit();
+  ship.hit();
+  ship.hit();
+  ship.hit();
   expect(ship.isSunk()).toBe(true);
 });

@@ -11,9 +11,10 @@ const enemy = playerFactory('enemy', gameboardFactory()).startGameboard();
 getAndSetShips(player);
 getAndSetShips(enemy);
 render(player, enemy);
-console.log(player.shipArray);
 
 const getRandomNumber = () => Math.floor(Math.random() * 9);
+
+const checkWinner = (user) => user.shipArray.every((ship) => ship.isSunk());
 
 // recursion if random (x,y) is not valid
 const enemyTurn = () => {
@@ -23,7 +24,6 @@ const enemyTurn = () => {
     enemyTurn();
   }
   player.fireMissile(x, y);
-  console.log(player.shipArray);
 };
 
 const playerTurn = (e) => {
@@ -53,6 +53,8 @@ const playRound = (e) => {
   } else {
     enemyTurn();
     render(player, enemy);
+    if (checkWinner(enemy)) console.log('Player Wins!');
+    if (checkWinner(player)) console.log('Enemy Wins!');
     document.querySelectorAll('.enemy.column').forEach((col) => {
       col.removeEventListener('click', playRound);
       col.addEventListener('click', playRound);
