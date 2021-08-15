@@ -6,6 +6,7 @@ import './styles/style.css';
 
 const player = playerFactory('you', gameboardFactory()).startGameboard();
 const enemy = playerFactory('enemy', gameboardFactory()).startGameboard();
+const messageEl = document.querySelector('.messagelog');
 
 // initial render
 getAndSetShips(player);
@@ -16,6 +17,8 @@ const getRandomNumber = () => Math.floor(Math.random() * 9);
 
 const checkWinner = (user) => user.shipArray.every((ship) => ship.isSunk());
 
+//  const updateMessage = (state) => (state ? 'Your Turn' : 'Enemy Turn');
+
 // recursion if random (x,y) is not valid
 const enemyTurn = () => {
   const x = getRandomNumber();
@@ -23,7 +26,7 @@ const enemyTurn = () => {
   if (player.getBoard()[x][y] === 'miss' || player.getBoard()[x][y] === 'hit') {
     enemyTurn();
   }
-  player.fireMissile(x, y);
+  return player.fireMissile(x, y);
 };
 
 const playerTurn = (e) => {
@@ -36,7 +39,6 @@ const playerTurn = (e) => {
     ] === 'hit'
   )
     return 'invalid';
-
   return enemy.fireMissile(
     Number(e.target.parentNode.classList[2]),
     Number(e.target.classList[2])
@@ -53,8 +55,8 @@ const playRound = (e) => {
   } else {
     enemyTurn();
     render(player, enemy);
-    if (checkWinner(enemy)) console.log('Player Wins!');
-    if (checkWinner(player)) console.log('Enemy Wins!');
+    if (checkWinner(enemy)) messageEl.textContent = 'Player Wins!';
+    if (checkWinner(player)) messageEl.textContent = 'Enemy Wins!';
     document.querySelectorAll('.enemy.column').forEach((col) => {
       col.removeEventListener('click', playRound);
       col.addEventListener('click', playRound);

@@ -1,7 +1,14 @@
-.mainboard {
+.game-proper {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+
+label {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .row {
@@ -49,6 +56,6 @@
   background: white;
 }
 
-.enemyboard {
+/* .enemyboard {
   margin-left: 10px;
-}
+} */
