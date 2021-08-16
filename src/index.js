@@ -18,20 +18,20 @@ const randomizePlacement = () => {
   getAndSetShips(enemy);
   render(player, enemy);
   messageEl.textContent =
-    'Click Randomize to re-place ships. Click Start to begin!';
+    'Click: Randomize to re-place ships. Start Game to begin!';
 };
 
 randomizePlacement();
 
-const getRandomNumber = () => Math.floor(Math.random() * 9);
+const getRandomNumber = () => Math.floor(Math.random() * 10);
 
 const checkWinner = (user) => user.shipArray.every((ship) => ship.isSunk());
 
 const updateMessage = (state) => {
   if (state === 'miss') {
-    messageEl.textContent = 'Miss!';
+    messageEl.textContent = 'You missed! Try again.';
   }
-  if (state === 'hit') messageEl.textContent = 'Ship Hit!';
+  if (state === 'hit') messageEl.textContent = 'You hit a Ship, nice!';
 };
 
 // recursion if random (x,y) is not valid
