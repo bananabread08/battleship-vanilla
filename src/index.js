@@ -4,20 +4,35 @@ import render from './render';
 import getAndSetShips from './getAndSetShips';
 import './styles/style.css';
 
-const player = playerFactory('you', gameboardFactory()).startGameboard();
-const enemy = playerFactory('enemy', gameboardFactory()).startGameboard();
-const messageEl = document.querySelector('.messagelog');
+let player;
+let enemy;
+const messageEl = document.querySelector('.message-log');
+const randomizeButton = document.querySelector('.randomize');
+const startButton = document.querySelector('.start');
 
 // initial render
-getAndSetShips(player);
-getAndSetShips(enemy);
-render(player, enemy);
+const randomizePlacement = () => {
+  player = playerFactory('you', gameboardFactory()).startGameboard();
+  enemy = playerFactory('enemy', gameboardFactory()).startGameboard();
+  getAndSetShips(player);
+  getAndSetShips(enemy);
+  render(player, enemy);
+  messageEl.textContent =
+    'Click Randomize to re-place ships. Click Start to begin!';
+};
+
+randomizePlacement();
 
 const getRandomNumber = () => Math.floor(Math.random() * 9);
 
 const checkWinner = (user) => user.shipArray.every((ship) => ship.isSunk());
 
-//  const updateMessage = (state) => (state ? 'Your Turn' : 'Enemy Turn');
+const updateMessage = (state) => {
+  if (state === 'miss') {
+    messageEl.textContent = 'Miss!';
+  }
+  if (state === 'hit') messageEl.textContent = 'Ship Hit!';
+};
 
 // recursion if random (x,y) is not valid
 const enemyTurn = () => {
@@ -29,20 +44,14 @@ const enemyTurn = () => {
   return player.fireMissile(x, y);
 };
 
+// eslint-disable-next-line consistent-return
 const playerTurn = (e) => {
-  if (
-    enemy.getBoard()[Number(e.target.parentNode.classList[2])][
-      Number(e.target.classList[2])
-    ] === 'miss' ||
-    enemy.getBoard()[Number(e.target.parentNode.classList[2])][
-      Number(e.target.classList[2])
-    ] === 'hit'
-  )
-    return 'invalid';
-  return enemy.fireMissile(
-    Number(e.target.parentNode.classList[2]),
-    Number(e.target.classList[2])
-  );
+  const a = Number(e.target.parentNode.classList[2]);
+  const b = Number(e.target.classList[2]);
+  if (enemy.getBoard()[a][b] !== 'miss' && enemy.getBoard()[a][b] !== 'hit') {
+    enemy.fireMissile(a, b);
+    updateMessage(enemy.getBoard()[a][b]);
+  } else return 'invalid';
 };
 
 // play 1 round. fire missile to enemy, enemy fires to player
@@ -64,7 +73,14 @@ const playRound = (e) => {
   }
 };
 
-// event starter
-document.querySelectorAll('.enemy.column').forEach((col) => {
-  col.addEventListener('click', playRound);
-});
+const startGame = () => {
+  randomizeButton.style.display = 'none';
+  startButton.style.display = 'none';
+  messageEl.textContent = 'Game Start! Click an Enemy Grid!';
+  document.querySelectorAll('.enemy.column').forEach((col) => {
+    col.addEventListener('click', playRound);
+  });
+};
+
+randomizeButton.addEventListener('click', randomizePlacement);
+startButton.addEventListener('click', startGame);
