@@ -7,18 +7,27 @@
     <title>Document</title>
   </head>
   <body>
-    <!-- <div class="main-menu">
+    <div class="main-menu">
       <div class="head">Battleship</div>
-    </div> -->
-    <div class="game-proper">
-      <div class="mainboard">
-        <label for="playerboard">Player Board</label>
-        <div class="playerboard"></div>
-        <label for="enemyboard">Enemy Board</label>
-        <div class="enemyboard"></div>
+      <div>
+        <button class="randomize">Randomize</button>
+        <button class="start">Start</button>
       </div>
-      <div class="messagelog">Battleship</div>
     </div>
+    <div class="game-proper">
+      <div class="message-log">Sample Message</div>
+      <div class="mainboard">
+        <div class="player-wrapper">
+          <label for="playerboard">Player Board</label>
+          <div class="playerboard"></div>
+        </div>
+        <div class="enemy-wrapper">
+          <label for="enemyboard">Enemy Board</label>
+          <div class="enemyboard"></div>
+        </div>
+      </div>
+    </div>
+    <!-- <div class="game-over" display="none">asdasds</div> -->
     <script src="main.js"></script>
   </body>
 </html>
