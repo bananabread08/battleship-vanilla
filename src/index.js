@@ -9,8 +9,10 @@ let enemy;
 const messageEl = document.querySelector('.message-log');
 const randomizeButton = document.querySelector('.randomize');
 const startButton = document.querySelector('.start');
+const modal = document.getElementById('game-over');
+const modalText = document.querySelector('.last-message');
+const restartButton = document.querySelector('.restart');
 
-// initial render
 const randomizePlacement = () => {
   player = playerFactory('you', gameboardFactory()).startGameboard();
   enemy = playerFactory('enemy', gameboardFactory()).startGameboard();
@@ -21,6 +23,7 @@ const randomizePlacement = () => {
     'Click: Randomize to re-place ships. Start Game to begin!';
 };
 
+// # initial render #
 randomizePlacement();
 
 const getRandomNumber = () => Math.floor(Math.random() * 10);
@@ -34,7 +37,7 @@ const updateMessage = (state) => {
   if (state === 'hit') messageEl.textContent = 'You hit a Ship, nice!';
 };
 
-// recursion if random (x,y) is not valid
+// # recursion if random (x,y) is not valid #
 const enemyTurn = () => {
   const x = getRandomNumber();
   const y = getRandomNumber();
@@ -64,8 +67,15 @@ const playRound = (e) => {
   } else {
     enemyTurn();
     render(player, enemy);
-    if (checkWinner(enemy)) messageEl.textContent = 'Player Wins!';
-    if (checkWinner(player)) messageEl.textContent = 'Enemy Wins!';
+    if (checkWinner(enemy)) {
+      messageEl.textContent = 'Player Wins!';
+      modalText.textContent = 'Game Over! Player Wins!';
+      modal.style.display = 'block';
+    }
+    if (checkWinner(player)) {
+      messageEl.textContent = 'Enemy Wins!';
+      modal.style.display = 'block';
+    }
     document.querySelectorAll('.enemy.column').forEach((col) => {
       col.removeEventListener('click', playRound);
       col.addEventListener('click', playRound);
@@ -84,3 +94,9 @@ const startGame = () => {
 
 randomizeButton.addEventListener('click', randomizePlacement);
 startButton.addEventListener('click', startGame);
+restartButton.addEventListener('click', () => {
+  modal.style.display = 'none';
+  randomizeButton.style.display = 'block';
+  startButton.style.display = 'block';
+  randomizePlacement();
+});
