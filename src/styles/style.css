@@ -1,13 +1,36 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Proza+Libre&display=swap');
+
+:root {
+  --raisin: #242124;
+  --skyblue: rgba(58, 134, 255, 0.4);
+  --ocean: #3a86ff;
+  --offwhite: #f9f9f9;
+  --lightred: rgb(230, 13, 13, 0.4);
+  --lightpink: rgb(231, 111, 111);
+}
 html,
 body {
   margin: 0;
   padding: 0;
   font-family: 'Poppins', sans-serif;
   height: 100%;
+  background: white;
 }
 * {
   box-sizing: border-box;
+}
+header {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  justify-content: center;
+  font-family: 'Proza Libre', sans-serif;
+  font-size: 25px;
+  font-weight: 700;
+  padding: 5px;
+  background-color: var(--raisin);
+  color: var(--offwhite);
 }
 .main-menu {
   display: flex;
@@ -87,7 +110,7 @@ body {
   width: 35px;
   margin: 0.5px;
   border: 2px solid gray;
-  background: #f9f9f9;
+  background: var(--offwhite);
 }
 .column:hover {
   border: 2px solid gold;
@@ -99,8 +122,8 @@ body {
 .playerboard .submarine,
 .playerboard .destroyer,
 .playerboard .tanker {
-  background-color: rgba(58, 134, 255, 0.4);
-  border: 2px solid #3a86ff;
+  background-color: var(--skyblue);
+  border: 2px solid var(--ocean);
 }
 .carrier,
 .battleship,
@@ -112,8 +135,8 @@ body {
   border: 2px solid #3a86ff;
 }
 .hit {
-  background-color: rgb(230, 13, 13, 0.4);
-  border: 2px solid rgb(231, 111, 111);
+  background-color: var(--lightred);
+  border: 2px solid var(--lightpink);
 }
 .miss {
   background: rgb(131, 131, 131, 0.5);
@@ -154,8 +177,22 @@ body {
     display: flex;
     flex-direction: column;
   }
+  .message-log {
+    width: 15em;
+  }
+  .row {
+    height: 30px;
+  }
+  .column {
+    width: 30px;
+  }
+  .randomize,
+  .start {
+    padding: 2px 4px 2px 4px;
+  }
   .player-wrapper {
     margin-left: 0;
+    margin-bottom: 10px;
   }
   .enemy-wrapper {
     margin-right: 0;
