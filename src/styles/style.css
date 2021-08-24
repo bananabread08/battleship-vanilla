@@ -9,21 +9,43 @@ body {
 * {
   box-sizing: border-box;
 }
-
 .main-menu {
   display: flex;
   align-items: center;
   justify-content: center;
-}
-.randomize,
-.start {
-  cursor: pointer;
 }
 .randomize {
   margin-right: 0.5em;
 }
 .start {
   margin-left: 0.5em;
+}
+.randomize,
+.start,
+.restart {
+  cursor: pointer;
+  font-family: lato, sans-serif;
+  font-weight: bold;
+  font-size: 1em;
+  letter-spacing: 0.1em;
+  text-decoration: none;
+  background: white;
+  color: black;
+  padding: 5px 7px 5px 7px;
+  border: 3px solid black;
+  border-radius: 20px;
+}
+.randomize:hover,
+.start:hover,
+.restart:hover {
+  background: black;
+  color: white;
+}
+.randomize:disabled,
+.start:disabled {
+  color: gray;
+  border: 1px solid;
+  pointer-events: none;
 }
 .game-proper {
   display: flex;
@@ -35,7 +57,7 @@ body {
   text-align: center;
   margin-top: 0.5em;
   border: 2px solid gray;
-  width: 20em;
+  width: 30em;
   padding: 1em 0 1em 0;
 }
 .mainboard {
@@ -48,7 +70,6 @@ body {
   justify-content: center;
   margin-left: 1em;
   margin-top: 1em;
-  border: 2px solid gray;
 }
 .enemy-wrapper {
   display: flex;
@@ -57,7 +78,6 @@ body {
   justify-content: center;
   margin-right: 1em;
   margin-top: 1em;
-  border: 2px solid gray;
 }
 .row {
   display: flex;
@@ -66,42 +86,38 @@ body {
 .column {
   width: 35px;
   margin: 0.5px;
-  border: 2px solid black;
-  background: rgb(255, 255, 255);
-  background: linear-gradient(
-    27deg,
-    rgba(255, 255, 255, 1) 0%,
-    rgba(156, 161, 229, 1) 21%,
-    rgba(2, 13, 189, 1) 100%
-  );
+  border: 2px solid gray;
+  background: #f9f9f9;
 }
 .column:hover {
   border: 2px solid gold;
   cursor: pointer;
 }
-.carrier {
-  background: #b7410e;
+.playerboard .carrier,
+.playerboard .battleship,
+.playerboard .frigate,
+.playerboard .submarine,
+.playerboard .destroyer,
+.playerboard .tanker {
+  background-color: rgba(58, 134, 255, 0.4);
+  border: 2px solid #3a86ff;
 }
-.battleship {
-  background: #e1ad01;
-}
-.frigate {
-  background: gray;
-}
-.submarine {
-  background: magenta;
-}
-.destroyer {
-  background: #40e0d0;
-}
+.carrier,
+.battleship,
+.frigate,
+.submarine,
+.destroyer,
 .tanker {
-  background: #addfad;
+  background-color: rgba(58, 134, 255, 0.4);
+  border: 2px solid #3a86ff;
 }
 .hit {
-  background: red;
+  background-color: rgb(230, 13, 13, 0.4);
+  border: 2px solid rgb(231, 111, 111);
 }
 .miss {
-  background: white;
+  background: rgb(131, 131, 131, 0.5);
+  border: 1px solid white;
 }
 
 .modal {
@@ -139,10 +155,10 @@ body {
     flex-direction: column;
   }
   .player-wrapper {
-    margin-right: 0;
+    margin-left: 0;
   }
   .enemy-wrapper {
-    margin-left: 0;
+    margin-right: 0;
   }
   .modal {
     display: none; /* Hidden by default */

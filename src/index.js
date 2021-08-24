@@ -82,8 +82,8 @@ const playRound = (e) => {
 };
 
 const startGame = () => {
-  randomizeButton.style.display = 'none';
-  startButton.style.display = 'none';
+  randomizeButton.disabled = true;
+  startButton.disabled = true;
   messageEl.textContent = 'Game Start! Click a Square in the Enemy Board!';
   document.querySelectorAll('.enemy.column').forEach((col) => {
     col.addEventListener('click', playRound);
@@ -94,7 +94,7 @@ randomizeButton.addEventListener('click', randomizePlacement);
 startButton.addEventListener('click', startGame);
 restartButton.addEventListener('click', () => {
   modal.style.display = 'none';
-  randomizeButton.style.display = 'block';
-  startButton.style.display = 'block';
+  randomizeButton.disabled = false;
+  startButton.disabled = false;
   randomizePlacement();
 });
