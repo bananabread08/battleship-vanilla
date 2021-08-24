@@ -1,4 +1,4 @@
-import shipFactory from './factories/shipFactory';
+import shipFactory from '../factories/shipFactory';
 
 const getAndSetShips = (user) => {
   const placedShips = [];

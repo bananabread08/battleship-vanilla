@@ -1,8 +1,10 @@
 import playerFactory from './factories/playerFactory';
 import gameboardFactory from './factories/gameboardFactory';
-import render from './render';
-import getAndSetShips from './getAndSetShips';
+import render from './modules/render';
+import getAndSetShips from './modules/getAndSetShips';
 import './styles/style.css';
+import getRandomNumber from './modules/getRandomNumber';
+import checkWinner from './modules/checkWinner';
 
 let player;
 let enemy;
@@ -25,10 +27,6 @@ const randomizePlacement = () => {
 
 // # initial render #
 randomizePlacement();
-
-const getRandomNumber = () => Math.floor(Math.random() * 10);
-
-const checkWinner = (user) => user.shipArray.every((ship) => ship.isSunk());
 
 const updateMessage = (state) => {
   if (state === 'miss') {
@@ -86,7 +84,7 @@ const playRound = (e) => {
 const startGame = () => {
   randomizeButton.style.display = 'none';
   startButton.style.display = 'none';
-  messageEl.textContent = 'Game Start! Click an Enemy Grid!';
+  messageEl.textContent = 'Game Start! Click a Square in the Enemy Board!';
   document.querySelectorAll('.enemy.column').forEach((col) => {
     col.addEventListener('click', playRound);
   });
