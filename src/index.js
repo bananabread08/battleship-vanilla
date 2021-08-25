@@ -66,12 +66,15 @@ const playRound = (e) => {
     enemyTurn();
     render(player, enemy);
     if (checkWinner(enemy)) {
-      messageEl.textContent = 'Player Wins!';
-      modalText.textContent = 'Game Over! Player Wins!';
+      messageEl.textContent = 'You win!';
+      modalText.textContent =
+        'Game Over! You destroyed all enemy ships. You Win!';
       modal.style.display = 'block';
     }
     if (checkWinner(player)) {
       messageEl.textContent = 'Enemy Wins!';
+      modalText.textContent =
+        'Game Over! Enemy destroyed all your ships! Enemy Wins!';
       modal.style.display = 'block';
     }
     document.querySelectorAll('.enemy.column').forEach((col) => {
