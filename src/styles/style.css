@@ -125,15 +125,6 @@ header {
   background-color: var(--skyblue);
   border: 2px solid var(--ocean);
 }
-.carrier,
-.battleship,
-.frigate,
-.submarine,
-.destroyer,
-.tanker {
-  background-color: rgba(58, 134, 255, 0.4);
-  border: 2px solid #3a86ff;
-}
 .hit {
   background-color: var(--lightred);
   border: 2px solid var(--lightpink);
