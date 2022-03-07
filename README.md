@@ -4,8 +4,11 @@ The Battleship Project for The Odin Project
 
 ## Overview
 
+![Imgur](https://i.imgur.com/SsAwywY.png)
+
 A Battleship game clone made with VanillaJS backed by Test Driven Development.
-Check the [Live Preview here!](https://bananabread08.github.io/battleship-vanilla/)
+
+[Live Preview here!](https://bananabread08.github.io/battleship-vanilla/)
 
 ## Features
 
